@@ -3,13 +3,6 @@
   "manifest_version": 3,
   "version": "0.1",
   "description": "Anonymize Hacker News users",
-  "permissions": [
-    "activeTab",
-    "scripting"
-  ],
-  "host_permissions": [
-    "https://news.ycombinator.com/*"
-  ],
   "content_scripts": [
     {
       "js": [
