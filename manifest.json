@@ -1,7 +1,7 @@
 {
   "name": "Anonymize HN",
   "manifest_version": 3,
-  "version": "0.1",
+  "version": "0.2",
   "description": "Anonymize Hacker News users",
   "content_scripts": [
     {
