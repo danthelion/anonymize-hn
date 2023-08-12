@@ -8,6 +8,25 @@ function deterministicHash(input) {
     return hash;
 }
 
+function reset() {
+    const hnuserElements = document.getElementsByClassName("hnuser");
+
+    for (let i = 0; i < hnuserElements.length; i++) {
+        const element = hnuserElements[i];
+        const elementOriginalText = element.getAttribute("data-hnuser-original");
+
+        // Create a new element to replace the original one
+        const newElement = document.createElement("a");
+        newElement.setAttribute("data-hnuser-original", elementOriginalText);
+        newElement.setAttribute("href", `user?id=${elementOriginalText}`);
+        newElement.textContent = `${elementOriginalText}`;
+        newElement.className = "hnuser";
+
+        // Replace the original element with the new one
+        element.parentNode.replaceChild(newElement, element);
+    }
+}
+
 function hashHnuserElements(anonymize) {
     const hnuserElements = document.getElementsByClassName("hnuser");
 
@@ -18,8 +37,9 @@ function hashHnuserElements(anonymize) {
         let elementHash = deterministicHash(elementText);
 
         // Create a new element to replace the original one
-        const newElement = document.createElement("div");
+        const newElement = document.createElement("a");
         newElement.setAttribute("data-hnuser-original", elementOriginalText);
+        newElement.setAttribute("href", `user?id=${elementOriginalText}`);
         if (anonymize) {
             newElement.textContent = "anonymous";
         } else {
@@ -58,12 +78,14 @@ function saveHashes() {
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
-        console.log({request, sender, sendResponse})
         if (request.hashNames) {
             hashHnuserElements(false);
         }
         if (request.fullAnonymize) {
             hashHnuserElements(true);
+        }
+        if (request.reset) {
+            reset();
         }
     }
 );

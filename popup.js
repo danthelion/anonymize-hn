@@ -8,6 +8,7 @@ function setupButtons(tabId) {
     // add click actions to each 3 buttons
     registerButtonAction(tabId, document.getElementById('fullAnonymize'), 'fullAnonymize');
     registerButtonAction(tabId, document.getElementById('hashNames'), 'hashNames');
+    registerButtonAction(tabId, document.getElementById('reset'), 'reset');
 }
 
 function injectStartSearchScript() {
